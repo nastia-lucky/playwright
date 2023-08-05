@@ -3,7 +3,6 @@ import { ForgotPasswordPage } from "./forgotPasswordPage";
 import { test, expect, Page, Locator } from "@playwright/test"
 
 
-
 export class SignInPage extends BasePage {
 
     private passwordTxt: Locator | undefined;

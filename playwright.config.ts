@@ -21,7 +21,7 @@ const config: PlaywrightTestConfig = {
     projects: [
         BrowserFactory.getBrowserObject()
     ],
-    workers: 1,
+    workers: 2,
     fullyParallel: true,
     reporter: 'html'
 

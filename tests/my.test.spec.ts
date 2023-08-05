@@ -9,10 +9,10 @@ import { SignInPage } from "../pages/signInPage";
 
 test.describe('Check main page', async () => {
 
-    let url = process.env.BASE_URL as string ;
-    let email: string = "klepatskayanastia@gmail.com";
+    let url = process.env.BASE_URL as string;
+    let email = process.env.EMAIL as string;
+    let password = process.env.PASSWORD as string;
     let incorrectEmail: string = "klepatskahhbhyanastia@gmail.com";
-    let password: string = "nastusha1213";
     let incorrectPassword: string = "nastusbhghhghja1213";
 
 
@@ -25,14 +25,12 @@ test.describe('Check main page', async () => {
         await mainPage.clickCatalogButtton();
         const catalogPage = PageFactory.getPage(page, Pages.CATALOG) as CatalogPage;
         expect(await catalogPage.isClassifierDisplayed()).toBeTruthy();
-    }) 
+    })
 
     test("Check user can sign in to onliner", async ({ page }) => {
         const mainPage = PageFactory.getPage(page, Pages.MAIN) as MainPage;
-        //const mainPage = new MainPage(page);
         await mainPage.clickSignInButtton();
         const signInPage = PageFactory.getPage(page, Pages.SIGNIN) as SignInPage;
-        //const signInPage: SignInPage = new SignInPage(page);
         await signInPage.inputEmail(email)
         await signInPage.inputPassword(password);
         await signInPage.clickSubmitButton();
@@ -53,7 +51,7 @@ test.describe('Check main page', async () => {
     test("Check correct message appears upon inputting not correct credentials", async ({ page }) => {
         const mainPage = PageFactory.getPage(page, Pages.MAIN) as MainPage;
         await mainPage.clickSignInButtton();
-        const signInPage = PageFactory.getPage(page,Pages.SIGNIN) as SignInPage;
+        const signInPage = PageFactory.getPage(page, Pages.SIGNIN) as SignInPage;
         await signInPage.inputEmail(incorrectEmail)
         await signInPage.inputPassword(incorrectPassword)
         await signInPage.clickSubmitButton();
@@ -63,11 +61,11 @@ test.describe('Check main page', async () => {
     test("Check correct message appears if user clicks Submit button without password provided", async ({ page }) => {
         const mainPage = PageFactory.getPage(page, Pages.MAIN) as MainPage;
         await mainPage.clickSignInButtton();
-        const signInPage = PageFactory.getPage(page,Pages.SIGNIN) as SignInPage;
+        const signInPage = PageFactory.getPage(page, Pages.SIGNIN) as SignInPage;
         await signInPage.inputEmail(incorrectEmail);
         await signInPage.clickSubmitButton();
         expect(await signInPage.isIndicatePswMessageDisplayed()).toBeTruthy();
-    }) 
+    })
 
 
 })
