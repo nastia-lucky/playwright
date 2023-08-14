@@ -1,9 +1,10 @@
 import { BasePage } from "./basePage";
 import { test, expect, Page, Locator } from "@playwright/test"
+import { clickMessageLog, isElementDisappearsLog } from "../log.conf";
 
 export class ForgotPasswordPage extends BasePage {
 
-    private restorePasswordForm: Locator | undefined;
+    private restorePasswordFormLocator: string = "//form[@novalidate]";
 
 
     constructor(page: Page) {
@@ -11,13 +12,21 @@ export class ForgotPasswordPage extends BasePage {
     }
 
     public async clickSubmitButton() {
-        this.submitBtn = await this.page.locator("//button[@type='submit' and contains(@class,'auth-button')]");
-        await this.submitBtn.click();
+        await test.step("I click submit button", async () => {
+            clickMessageLog(this.submitBtnLocator);
+            await this.page.locator(this.submitBtnLocator).click();
+        })
     }
 
+
     public async isRestorePasswordFormDisappears() {
-        this.restorePasswordForm = this.page.locator("//form[@novalidate]");
-        return await this.restorePasswordForm.count() == 0;
+        let isDisappear;
+        await test.step("I check restore password form disappears", async () => {
+            isElementDisappearsLog(this.restorePasswordFormLocator);
+            isDisappear = await this.page.locator(this.restorePasswordFormLocator).count() == 0;
+        })
+        return isDisappear;
+
     }
 
 }

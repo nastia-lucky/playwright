@@ -1,11 +1,12 @@
 
 import { BasePage } from "./basePage";
 import { test, expect, Page, Locator } from "@playwright/test"
+import { isEnabledMessageLog } from "../log.conf";
 
 
 export class CatalogPage extends BasePage {
 
-    private classifierLbl: Locator | undefined;
+    private classifierLblLocator: string = "//ul[@class='catalog-navigation-classifier ']";
 
     constructor(page: Page) {
         super(page);
@@ -13,10 +14,12 @@ export class CatalogPage extends BasePage {
 
 
     public async isClassifierDisplayed() {
-        this.classifierLbl = await this.page.locator("//ul[@class='catalog-navigation-classifier ']")
-        return await this.classifierLbl.isEnabled();
+        let isDisplayed;
+        await test.step("I check classifier label is displayed", async () => {
+            isEnabledMessageLog(this.classifierLblLocator);
+            isDisplayed = await this.page.locator(this.classifierLblLocator).isEnabled;
+        })
+        return isDisplayed;
     }
-
-
 
 }

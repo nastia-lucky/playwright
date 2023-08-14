@@ -23,7 +23,16 @@ const config: PlaywrightTestConfig = {
     ],
     workers: 2,
     fullyParallel: true,
-    reporter: 'html'
+    reporter: [
+        [
+            "allure-playwright",
+            {
+              detail: true,
+              outputFolder: "allure-report",
+              suiteTitle: true,
+            },
+          ]
+    ]
 
 }
 
