@@ -10,7 +10,8 @@ const config: PlaywrightTestConfig = {
         viewport: { width: 1280, height: 1024 },
         actionTimeout: 10 * 1000,
         navigationTimeout: 15 * 1000, 
-        screenshot : "only-on-failure"
+        screenshot : "only-on-failure", 
+        headless: true
     },
 
     timeout: 30 * 1000,
@@ -30,7 +31,7 @@ const config: PlaywrightTestConfig = {
             {
               detail: true,
               outputFolder: "allure-report",
-              suiteTitle: true,
+              suiteTitle: true
             },
           ]
     ]
