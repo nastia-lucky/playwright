@@ -6,6 +6,8 @@ import { MainPage } from "../pages/mainPage";
 import { Pages } from "../pages/factory/pageEnums";
 import { PageFactory } from "../pages/factory/pageFactory";
 import { SignInPage } from "../pages/signInPage";
+import { ProductPage } from "../pages/productPage";
+import { BasketPage } from "../pages/basketPage";
 
 test.describe('Check main page', async () => {
 
@@ -66,6 +68,25 @@ test.describe('Check main page', async () => {
         await signInPage.clickSubmitButton();
         expect(await signInPage.isIndicatePswMessageDisplayed()).toBeTruthy();
     })
+
+    test("Check user can put product to basket", async ({ page }) => {
+        const mainPage = PageFactory.getPage(page, Pages.MAIN) as MainPage;
+         await mainPage.clickCatalogButtton();
+        //await test.setTimeout(6000);
+        const catalogPage = PageFactory.getPage(page, Pages.CATALOG) as CatalogPage;
+        await catalogPage.clickClassifier("Электроника")
+        await catalogPage.clickSideMenu("Мобильные");
+        await catalogPage.clickLink();
+        //await catalogPage.setFilter("Xiaomi");
+        await catalogPage.clickOffersButton();
+        const productPage = PageFactory.getPage(page, Pages.PRODUCT) as ProductPage;
+        await productPage.putProductToBasket();
+        await productPage.openBasket();
+        const basketPage = PageFactory.getPage(page, Pages.BASKET) as BasketPage;
+        expect(await basketPage.isCompleteOrderButtonDisplayed).toBeTruthy();
+    })
+
+
 
 
 })

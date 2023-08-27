@@ -2,6 +2,8 @@ export enum Pages{
     MAIN,
     CATALOG,
     FORGOTPASSSWORD,
-    SIGNIN
+    SIGNIN, 
+    PRODUCT, 
+    BASKET
 
 }

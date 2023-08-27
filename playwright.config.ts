@@ -9,7 +9,8 @@ const config: PlaywrightTestConfig = {
     use: {
         viewport: { width: 1280, height: 1024 },
         actionTimeout: 10 * 1000,
-        navigationTimeout: 15 * 1000
+        navigationTimeout: 15 * 1000, 
+        screenshot : "only-on-failure"
     },
 
     timeout: 30 * 1000,

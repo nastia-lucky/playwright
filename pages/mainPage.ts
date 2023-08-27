@@ -20,7 +20,6 @@ export class MainPage extends BasePage {
             clickMessageLog(this.catalogBtnLocator);
             await this.page.locator(this.catalogBtnLocator).click();
         })
-
     }
 
 
