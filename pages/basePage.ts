@@ -25,7 +25,7 @@ export abstract class BasePage {
 
     public async clickLink() {
         let linkLocator = "//div[contains(text(), 'суперцены')]";
-        await test.step(`I click link`, async () => {
+        await test.step(`I click superprice link `, async () => {
             clickMessageLog(linkLocator);
             await this.page.locator(linkLocator).click();
         })

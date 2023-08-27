@@ -71,18 +71,15 @@ test.describe('Check main page', async () => {
 
     test("Check user can put product to basket", async ({ page }) => {
         const mainPage = PageFactory.getPage(page, Pages.MAIN) as MainPage;
-         await mainPage.clickCatalogButtton();
-        //await test.setTimeout(6000);
+        await mainPage.clickCatalogButtton();
         const catalogPage = PageFactory.getPage(page, Pages.CATALOG) as CatalogPage;
         await catalogPage.clickClassifier("Электроника")
         await catalogPage.clickSideMenu("Мобильные");
-        await catalogPage.clickLink();
-        //await catalogPage.setFilter("Xiaomi");
+        catalogPage.clickLink();
         await catalogPage.clickOffersButton();
         const productPage = PageFactory.getPage(page, Pages.PRODUCT) as ProductPage;
         await productPage.putProductToBasket();
         await productPage.goToBasket();
-        //await productPage.openBasket();
         const basketPage = PageFactory.getPage(page, Pages.BASKET) as BasketPage;
         expect(await basketPage.isCompleteOrderButtonDisplayed).toBeTruthy();
     })
