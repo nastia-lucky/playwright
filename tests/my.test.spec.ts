@@ -81,7 +81,8 @@ test.describe('Check main page', async () => {
         await catalogPage.clickOffersButton();
         const productPage = PageFactory.getPage(page, Pages.PRODUCT) as ProductPage;
         await productPage.putProductToBasket();
-        await productPage.openBasket();
+        await productPage.goToBasket();
+        //await productPage.openBasket();
         const basketPage = PageFactory.getPage(page, Pages.BASKET) as BasketPage;
         expect(await basketPage.isCompleteOrderButtonDisplayed).toBeTruthy();
     })
